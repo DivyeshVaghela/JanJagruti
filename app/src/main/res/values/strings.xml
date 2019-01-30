@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Jan Jagruti</string>
+
+    <!--General-->
+    <string name="processing">Processing ..</string>
+    <string name="okay">Okay</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!--Error & Confirmation-->
+    <string name="session_expired">Session expired or authentication failed, please login again..</string>
+    <string name="no_network">It seems that you are not connected to the internet</string>
+    <string name="server_not_reachable">Server not reachable, please try again</string>
+    <string name="refresh">Refresh</string>
+    <string name="unauthorized">Unauthorized to access the specified resource</string>
+    <string name="something_wrong">Something went wrong, please try again</string>
+    <string name="something_wrong_funny">Oops, Something went wrong..</string>
+
+    <!--Login & Registration-->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login_link_text">Already registerd? Login now</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="register_link_text">Don\'t have an account? Register now</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="username">Username</string>
+
+    <string name="empty_field_message">Field can\'t be empty</string>
+    <string name="invalid_email_address">Enter a valid Email Address</string>
+    <string name="invalid_mobile_no">Enter a valid 10 digit Mobile No</string>
+    <string name="confirm_password_mismatch">Password Missmatch</string>
+
+    <string name="invalid_credential">Invalid Credential</string>
+    <string name="login_successful">Logged in successfully</string>
+    <string name="registration_successful">Registration successful, you can login now.</string>
+
+    <string name="logout">Log out</string>
+
+    <!--Dashboard-->
+    <string name="dashboard">Dashboard</string>
+
+    <!--Notice / Notification-->
+    <string name="notice">Notice</string>
+    <string name="title">Title</string>
+    <string name="details">Details</string>
+    <string name="posted_by">Posted By</string>
+    <string name="posted_datetime">Posted date-time</string>
+</resources>

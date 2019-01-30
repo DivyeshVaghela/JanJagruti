@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_width">300dp</dimen>
+
+    <dimen name="font_very_small">10dp</dimen>
+    <dimen name="font_small">15sp</dimen>
+    <dimen name="font_medium">20sp</dimen>
+    <dimen name="font_large">30sp</dimen>
+    <dimen name="font_very_large">40sp</dimen>
+    <dimen name="font_very_very_large">50sp</dimen>
+
+    <dimen name="space_very_little">5dp</dimen>
+    <dimen name="space_little">10dp</dimen>
+    <dimen name="space_medium">15dp</dimen>
+    <dimen name="space_large">20dp</dimen>
+</resources>
