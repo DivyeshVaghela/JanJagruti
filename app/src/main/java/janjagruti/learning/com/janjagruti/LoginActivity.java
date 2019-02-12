@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private SessionManager sessionManager;
 
     private TextInputLayout txtInputEmail, txtInputPassword;
-    private Button btnRegisterLink, btnLogin;
+    private Button btnRegisterLink, btnLogin, btnForgotPasswordLink;
     private TextView txtview_ErrorMessage;
 
     private Dialog progressDialog;
@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {}
         });
 
-        txtInputPassword = findViewById(R.id.txtInputPassword);
+        txtInputPassword = findViewById(R.id.txtInputCurrentPassword);
         txtInputPassword.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnSendMail);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +106,16 @@ public class LoginActivity extends AppCompatActivity {
                         txtInputEmail.getEditText().getText().toString().trim(),
                         txtInputPassword.getEditText().getText().toString().trim()
                 );
+            }
+        });
+
+        btnForgotPasswordLink = findViewById(R.id.btnForgotPasswordLink);
+        btnForgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

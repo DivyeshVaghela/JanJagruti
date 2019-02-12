@@ -8,20 +8,51 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
+
+import java.util.Map;
+
+import janjagruti.learning.com.janjagruti.adapter.SubjectAdapter;
+import janjagruti.learning.com.janjagruti.config.ApiConfig;
+import janjagruti.learning.com.janjagruti.config.AppController;
 import janjagruti.learning.com.janjagruti.config.SessionManager;
+import janjagruti.learning.com.janjagruti.entity.EntityList;
+import janjagruti.learning.com.janjagruti.entity.Subject;
 import janjagruti.learning.com.janjagruti.entity.User;
+import janjagruti.learning.com.janjagruti.util.JSONConverterUtil;
+import janjagruti.learning.com.janjagruti.util.VolleyUtil;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String TAG = DashboardActivity.class.getSimpleName();
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView drawerNavigation;
     private ActionBarDrawerToggle drawerToggle;
+
+    private TextView drawerHearder_username, drawerHeader_email;
+
+    private RecyclerView rv_subjectList;
+    private SubjectAdapter subjectAdapter;
+    private CardView card_loading;
 
     private SessionManager sessionManager;
 
@@ -39,6 +70,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         drawerLayout = findViewById(R.id.drawerLayout);
         drawerNavigation = findViewById(R.id.drawerNavigation);
 
+        View headerView = drawerNavigation.getHeaderView(0);
+
+        User userProfile = sessionManager.getUserProfile();
+        drawerHearder_username = headerView.findViewById(R.id.drawerHearder_username);
+        drawerHearder_username.setText(userProfile.getUsername());
+        drawerHeader_email = headerView.findViewById(R.id.drawerHeader_email);
+        drawerHeader_email.setText(userProfile.getEmail());
+
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
@@ -46,9 +85,57 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         drawerNavigation.setNavigationItemSelectedListener(this);
 
-        /*TextView textView = findViewById(R.id.textView);
-        User userProfile = sessionManager.getUserProfile();
-        textView.setText(userProfile.getUsername() + " : " + userProfile.getEmail());*/
+        card_loading = findViewById(R.id.card_loading);
+
+        rv_subjectList = findViewById(R.id.rv_subjectList);
+        subjectAdapter = new SubjectAdapter();
+        subjectAdapter.setSubjectClickListener(new SubjectAdapter.SubjectClickListener() {
+            @Override
+            public void onSubjectClicked(int subjectId, String subjectTitle) {
+                Intent intent = new Intent(DashboardActivity.this, SubjectActivity.class);
+                intent.putExtra(SubjectActivity.EXTRA_SUBJECT_ID, subjectId);
+                intent.putExtra(SubjectActivity.EXTRA_SUBJECT_TITLE, subjectTitle);
+                startActivity(intent);
+            }
+        });
+        rv_subjectList.setAdapter(subjectAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rv_subjectList.setLayoutManager(linearLayoutManager);
+
+        loadSubjectList();
+    }
+
+    private void loadSubjectList(){
+
+        final JsonObjectRequest subjectListRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                ApiConfig.BASE_URL + ApiConfig.SUBJECT_URI,
+                null,
+
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.d("Response", response.toString());
+
+                        EntityList<Subject> entityList = JSONConverterUtil.fromJSONObject(response, TypeToken.getParameterized(EntityList.class, Subject.class).getType());
+                        subjectAdapter.addAllItems(entityList.getList());
+                        card_loading.setVisibility(View.GONE);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyUtil.volleyErrorHandler(error, DashboardActivity.this, true);
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return VolleyUtil.getHeaders(sessionManager);
+            }
+        };
+        AppController.getInstance().addToRequestQueue(subjectListRequest, TAG);
     }
 
     @Override
@@ -87,6 +174,13 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_logout: {
                 sessionManager.loggedOut();
                 goToLoginActivity();
+                return true;
+            }
+
+            case R.id.nav_changePassword: {
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Intent intent = new Intent(DashboardActivity.this, ChangePasswordActivity.class);
+                startActivity(intent);
                 return true;
             }
 

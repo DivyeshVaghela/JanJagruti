@@ -3,7 +3,7 @@
 
     <dimen name="default_width">300dp</dimen>
 
-    <dimen name="font_very_small">10dp</dimen>
+    <dimen name="font_very_small">10sp</dimen>
     <dimen name="font_small">15sp</dimen>
     <dimen name="font_medium">20sp</dimen>
     <dimen name="font_large">30sp</dimen>
@@ -14,4 +14,7 @@
     <dimen name="space_little">10dp</dimen>
     <dimen name="space_medium">15dp</dimen>
     <dimen name="space_large">20dp</dimen>
+
+    <dimen name="height_small">18dp</dimen>
+    <dimen name="width_small">18dp</dimen>
 </resources>

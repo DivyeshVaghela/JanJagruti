@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import janjagruti.learning.com.janjagruti.config.ApiConfig;
 import janjagruti.learning.com.janjagruti.config.AppController;
@@ -97,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {}
         });
 
-        txtInputPassword = findViewById(R.id.txtInputPassword);
+        txtInputPassword = findViewById(R.id.txtInputCurrentPassword);
         txtInputPassword.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
@@ -313,8 +315,12 @@ public class RegisterActivity extends AppCompatActivity {
                         registrationUnsuccessful(errorMessage);
                     }
                 });
+        registerRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int)TimeUnit.SECONDS.toMillis(10),
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         AppController.getInstance().addToRequestQueue(registerRequest, TAG);
-
         processStarted();
     }
 

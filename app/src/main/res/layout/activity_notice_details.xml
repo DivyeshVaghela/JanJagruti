@@ -75,8 +75,8 @@
 
                     <ImageView
                         android:id="@+id/img_postedBy"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="@dimen/width_small"
+                        android:layout_height="@dimen/height_small"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:scaleType="fitCenter"
@@ -87,8 +87,8 @@
 
                     <ImageView
                         android:id="@+id/img_postedDateTime"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="@dimen/width_small"
+                        android:layout_height="@dimen/height_small"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_access_time_black"

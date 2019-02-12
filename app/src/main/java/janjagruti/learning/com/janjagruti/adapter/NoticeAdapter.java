@@ -46,6 +46,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     public void setNoticeList(List<Notice> noticeList) {
         this.noticeList = noticeList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -65,8 +66,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         }
 
         return new ViewHolder(cv);
-        /*CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_notice, parent, false);
-        return new ViewHolder(cv);*/
     }
 
     @Override
@@ -88,7 +87,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d(LoginActivity.TAG, "Notice Clicked");
                     if (noticeClickListener != null)
                         noticeClickListener.onNoticeClicked(notice.getId());
                 }
@@ -115,7 +113,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     }
 
     public void addAllItems(List<Notice> noticeList){
-        int positionStart = this.noticeList.size() - 1;
+        int positionStart = this.noticeList.size() == 0 ? 0 : this.noticeList.size() - 1;
+
         if (isLoadingAdded){
             this.noticeList.addAll(positionStart, noticeList);
         } else {
@@ -156,12 +155,15 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     }
 
     public void removeLoadingFooter(){
-        int lastPosition = noticeList.size() - 1;
-        Notice item = getItem(lastPosition);
-        if (isLoadingAdded && item != null){
-            noticeList.remove(lastPosition);
-            notifyItemRemoved(lastPosition);
-            isLoadingAdded = false;
+        if (isLoadingAdded) {
+            int lastPosition = noticeList.size() - 1;
+            Notice item = getItem(lastPosition);
+            if (item != null) {
+                removeAt(lastPosition);
+                /*noticeList.remove(lastPosition);
+                notifyItemRemoved(lastPosition);*/
+                isLoadingAdded = false;
+            }
         }
     }
 

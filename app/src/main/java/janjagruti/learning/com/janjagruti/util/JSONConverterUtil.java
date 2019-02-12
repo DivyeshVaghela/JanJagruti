@@ -63,8 +63,15 @@ public class JSONConverterUtil {
         return getGson().fromJson(jsonObject.toString(), clazz);
     }
 
+    public static <T> T fromJSONObject(String jsonObject, Class<T> clazz){
+        return getGson().fromJson(jsonObject, clazz);
+    }
+
+    public static <T> T fromJSONObject(JSONObject jsonObject, Type type){
+        return getGson().fromJson(jsonObject.toString(), type);
+    }
+
     public static <T> List<T> fromJSONArray(JSONArray jsonArray, Type type){
-        List<T> list = getGson().fromJson(jsonArray.toString(), type);
-        return list;
+        return getGson().fromJson(jsonArray.toString(), type);
     }
 }

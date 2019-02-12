@@ -31,7 +31,10 @@
             android:name=".RegisterActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".DashboardActivity" />
+        <activity
+            android:name=".DashboardActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NoticeListActivity"
             android:configChanges="orientation"
@@ -52,7 +55,49 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NoticeListActivity" />
         </activity>
-        <activity android:name=".ErrorActivity"></activity>
+        <activity
+            android:name=".ErrorActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SubjectActivity"
+            android:configChanges="orientation"
+            android:label="@string/subject"
+            android:parentActivityName=".DashboardActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".MaterialDetailsActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".DashboardActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".MaterialActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".DashboardActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
+        <activity android:name=".ForgotPasswordActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ChangePasswordActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".DashboardActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>

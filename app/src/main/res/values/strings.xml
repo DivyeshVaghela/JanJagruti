@@ -6,6 +6,7 @@
     <string name="okay">Okay</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
 
     <!--Error & Confirmation-->
     <string name="session_expired">Session expired or authentication failed, please login again..</string>
@@ -15,6 +16,9 @@
     <string name="unauthorized">Unauthorized to access the specified resource</string>
     <string name="something_wrong">Something went wrong, please try again</string>
     <string name="something_wrong_funny">Oops, Something went wrong..</string>
+    <string name="no_content">Not content found</string>
+    <string name="not_found">The resource you\'r trying to find doesn\'t exists</string>
+    <string name="material_type_not_supported">Material currently not supported, work in progress.</string>
 
     <!--Login & Registration-->
     <string name="email">Email</string>
@@ -26,6 +30,18 @@
     <string name="register_link_text">Don\'t have an account? Register now</string>
     <string name="mobile_no">Mobile No</string>
     <string name="username">Username</string>
+
+    <!--Forgot password-->
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password_que">Forgot Password ?</string>
+    <string name="send_mail">Send Mail</string>
+    <string name="back">Back</string>
+
+    <!--change password-->
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="password_change_success">Password changed successfully, please login again</string>
 
     <string name="empty_field_message">Field can\'t be empty</string>
     <string name="invalid_email_address">Enter a valid Email Address</string>
@@ -47,4 +63,14 @@
     <string name="details">Details</string>
     <string name="posted_by">Posted By</string>
     <string name="posted_datetime">Posted date-time</string>
+
+    <!--Subject-->
+    <string name="subtitle">Subtitle</string>
+    <string name="subject">Subject</string>
+
+    <!--Material-->
+    <string name="material">Material</string>
+    <string name="launch">Launch</string>
+    <string name="type">Type</string>
+
 </resources>

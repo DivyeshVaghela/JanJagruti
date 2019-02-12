@@ -7,32 +7,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import janjagruti.learning.com.janjagruti.adapter.NoticeAdapter;
 import janjagruti.learning.com.janjagruti.config.ApiConfig;
 import janjagruti.learning.com.janjagruti.config.AppController;
 import janjagruti.learning.com.janjagruti.config.SessionManager;
+import janjagruti.learning.com.janjagruti.entity.EntityList;
 import janjagruti.learning.com.janjagruti.entity.Notice;
-import janjagruti.learning.com.janjagruti.entity.NoticeList;
 import janjagruti.learning.com.janjagruti.util.JSONConverterUtil;
 import janjagruti.learning.com.janjagruti.util.VolleyUtil;
 
@@ -115,11 +108,10 @@ public class NoticeListActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        Log.d(LoginActivity.TAG, response.toString());
+                        EntityList<Notice> entityList = JSONConverterUtil.fromJSONObject(response, TypeToken.getParameterized(EntityList.class, Notice.class).getType());
 
-                        NoticeList notices = JSONConverterUtil.fromJSONObject(response, NoticeList.class);
-                        noticeAdapter.addAllItems(notices.getNotices());
-                        totalNotice = notices.getTotalNotice();
+                        noticeAdapter.addAllItems(entityList.getList());
+                        totalNotice = entityList.getTotal();
                         if (totalNotice == noticeAdapter.getItemCount() - 1){
                             isLastPage = true;
                             noticeAdapter.removeLoadingFooter();
@@ -131,7 +123,6 @@ public class NoticeListActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        isLoading = false;
                         VolleyUtil.volleyErrorHandler(error, NoticeListActivity.this);
                     }
                 }
@@ -155,8 +146,6 @@ public class NoticeListActivity extends AppCompatActivity {
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                Log.d(TAG, "visibleItemCount = " + visibleItemCount + ", totalItemCount = " + totalItemCount + ", firstVisibleItemPosition = " + firstVisibleItemPosition);
 
                 if (!isLoading && !isLastPage){
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount){
