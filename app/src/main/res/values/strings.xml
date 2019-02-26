@@ -7,6 +7,9 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
+    <string name="dummy_datetime">01, Jan 2019 00:00 (AM)</string>
+    <string name="dummy_date">01, Jan 2019</string>
+    <string name="dummy_time">00:00 (AM)</string>
 
     <!--Error & Confirmation-->
     <string name="session_expired">Session expired or authentication failed, please login again..</string>
@@ -63,6 +66,7 @@
     <string name="details">Details</string>
     <string name="posted_by">Posted By</string>
     <string name="posted_datetime">Posted date-time</string>
+    <string name="created_datetime">Created date-time</string>
 
     <!--Subject-->
     <string name="subtitle">Subtitle</string>
@@ -73,4 +77,21 @@
     <string name="launch">Launch</string>
     <string name="type">Type</string>
 
+    <!--User profile-->
+    <string name="user_profile">User Profile</string>
+
+    <!--Package-->
+    <string name="package_details">Package Details</string>
+    <string name="packages">Packages</string>
+    <string name="package_name">Package Name</string>
+    <string name="enrollment">Enrollment</string>
+    <string name="expiry">Expiry</string>
+    <string name="no_premium_user_message">You are not a premium user, so you\'ll not be able to access all the content</string>
+    <string name="go_premium">Upgrade to Premium Now</string>
+    <string name="explore_packages">Explore Packages</string>
+    <string name="rs_symbol">\u20B9</string>
+    <string name="dummy_ruppee">200.00</string>
+    <string name="validity">Validity</string>
+    <string name="rate_format" formatted="false">\u20B9 %.2f for %d %s</string>
+    <string name="activate_now">Activate Now</string>
 </resources>

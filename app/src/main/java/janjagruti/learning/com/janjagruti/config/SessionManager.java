@@ -71,8 +71,6 @@ public class SessionManager {
             .putLong(KEY_API_TOKEN_EXPIRES, expire);
 
         if (userProfile != null){
-            Log.d("LoginAttempt", "Set User profile");
-            Log.d("LoginAttempt", userProfile.toString());
             editor.putString(KEY_USER_PROFILE, new Gson().toJson(userProfile));
         }
         editor.commit();
@@ -108,5 +106,21 @@ public class SessionManager {
     public boolean isLoggedIn() {
         //sharedPreferences.edit().clear().commit();
         return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
+    }
+
+    public boolean isPremiumUser(){
+
+        User userProfile = getUserProfile();
+        Date now = new Date();
+
+        Log.d("LoginAttempt", "now = " + now.toString());
+
+        if (userProfile.getActivePackage() != null && userProfile.getActivePackage().getUserPackage() != null
+                && now.after(userProfile.getActivePackage().getUserPackage().getValidityStart())
+                && now.before(userProfile.getActivePackage().getUserPackage().getValidityEnd())) {
+            Log.d("LoginAttempt", "ValidityStart = " + userProfile.getActivePackage().getUserPackage().getValidityStart() + ", ValidityEnd = " + userProfile.getActivePackage().getUserPackage().getValidityEnd());
+            return true;
+        }
+        return false;
     }
 }

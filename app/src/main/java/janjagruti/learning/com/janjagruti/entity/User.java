@@ -3,16 +3,32 @@ package janjagruti.learning.com.janjagruti.entity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class User {
 
+    private String id;
     private String username;
     private String email;
     private String mobileNo;
     private String password;
+
+    @SerializedName("Packages")
+    private List<Package> packages = new ArrayList<>();
+    private Package activePackage;
+
+    @SerializedName("created_at")
+    private Date createdAt;
+
+    @SerializedName("updated_at")
+    private Date updatedAt;
 
     public User() { }
 
@@ -21,6 +37,14 @@ public class User {
         this.email = email;
         this.mobileNo = mobileNo;
         this.password = password;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -55,13 +79,54 @@ public class User {
         this.password = password;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<Package> getPackages() {
+        return packages;
+    }
+
+    public void setPackages(List<Package> packages) {
+        this.packages = packages;
+        if (this.packages != null && this.packages.size() > 0)
+            this.activePackage = this.packages.get(0);
+    }
+
+    public Package getActivePackage() {
+        if (activePackage == null && this.packages != null && this.packages.size() > 0)
+            this.activePackage = this.packages.get(0);
+        return activePackage;
+    }
+
+    public void setActivePackage(Package activePackage) {
+        this.activePackage = activePackage;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", mobileNo='" + mobileNo + '\'' +
                 ", password='" + password + '\'' +
+                ", packages=" + packages +
+                ", activePackage=" + getActivePackage() +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

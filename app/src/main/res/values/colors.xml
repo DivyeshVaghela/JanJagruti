@@ -16,4 +16,7 @@
 
     <color name="translucent_white">#7dffffff</color>
     <color name="darkGray">#6c6c6c</color>
+
+    <color name="colorSuccess">#0cb734</color>
+    <color name="colorSuccessDark">#068424</color>
 </resources>

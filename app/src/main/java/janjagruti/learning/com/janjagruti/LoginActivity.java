@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -179,7 +180,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         AuthResponse authResponse = JSONConverterUtil.fromJSONObject(response, AuthResponse.class);
-
                         if (!authResponse.isSuccess()){
                             loginUnsuccessful(getString(R.string.invalid_credential));
                             return;

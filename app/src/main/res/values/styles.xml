@@ -20,6 +20,15 @@
         <item name="android:paddingRight">@dimen/space_little</item>
     </style>
 
+    <style name="SuccessButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/success_gradient</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:paddingLeft">@dimen/space_large</item>
+        <item name="android:paddingRight">@dimen/space_little</item>
+    </style>
+
     <style name="ErrorTextStyle" parent="TextAppearance.AppCompat.Small">
         <item name="android:textStyle">italic|bold</item>
         <item name="android:textColor">@android:color/holo_red_light</item>
@@ -35,5 +44,10 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/font_very_very_large</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardViewSharpCorners" parent="CardView">
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardElevation">0dp</item>
     </style>
 </resources>

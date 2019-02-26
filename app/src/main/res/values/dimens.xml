@@ -17,4 +17,6 @@
 
     <dimen name="height_small">18dp</dimen>
     <dimen name="width_small">18dp</dimen>
+
+    <dimen name="elevetion_medium">5dp</dimen>
 </resources>

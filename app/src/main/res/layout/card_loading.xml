@@ -9,7 +9,7 @@
     android:layout_marginLeft="@dimen/space_little"
     android:layout_marginTop="@dimen/space_little"
     android:layout_marginRight="@dimen/space_little"
-    android:layout_marginBottom="@dimen/space_very_little"
+    android:layout_marginBottom="@dimen/space_little"
     app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardBackgroundColor="@android:color/transparent"
     app:cardElevation="0dp">

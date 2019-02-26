@@ -20,6 +20,7 @@ public class Material {
     private Subject subject;
     private Type type;
     private User createdBy;
+    private boolean isPremium;
 
     @SerializedName("created_at")
     private Date CreatedAt;
@@ -125,5 +126,13 @@ public class Material {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isPremium() {
+        return isPremium;
+    }
+
+    public void setPremium(boolean premium) {
+        isPremium = premium;
     }
 }

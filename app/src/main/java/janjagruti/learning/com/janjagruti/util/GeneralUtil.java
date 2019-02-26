@@ -20,6 +20,14 @@ public class GeneralUtil {
         return new SimpleDateFormat("dd MMM, yyyy (hh:mm a)");
     }
 
+    public static SimpleDateFormat getOnlyDateFormat(){
+        return new SimpleDateFormat("dd MMM, yyyy");
+    }
+
+    public static SimpleDateFormat getOnlyTimeFormat(){
+        return new SimpleDateFormat("hh:mm (a)");
+    }
+
     //run on background thread
     public static boolean isServerReachable(){
         try {

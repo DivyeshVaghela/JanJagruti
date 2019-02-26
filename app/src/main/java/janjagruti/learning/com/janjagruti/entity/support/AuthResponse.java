@@ -1,7 +1,12 @@
 package janjagruti.learning.com.janjagruti.entity.support;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import janjagruti.learning.com.janjagruti.entity.Package;
 import janjagruti.learning.com.janjagruti.entity.User;
 
 public class AuthResponse {

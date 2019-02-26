@@ -43,7 +43,7 @@ public class MaterialDetailsActivity extends AppCompatActivity {
     private CardView card_noticeDetails, card_loading;
     private NetworkImageView img_materialLogo;
     private TextView txtview_title, txtview_subtitle, txtview_type, txtview_subject, txtview_postedBy, txtview_postedDateTime, txtview_details;
-    private Button btn_launch;
+    private Button btn_launch, btn_goPremium;
 
     private int materialId = 0;
     private String materialTitle;
@@ -101,13 +101,7 @@ public class MaterialDetailsActivity extends AppCompatActivity {
         txtview_details = findViewById(R.id.txtview_details);
 
         btn_launch = findViewById(R.id.btn_launch);
-        materialLaunchIntent = new Intent(MaterialDetailsActivity.this, MaterialActivity.class);
-        btn_launch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(materialLaunchIntent);
-            }
-        });
+        btn_goPremium = findViewById(R.id.btn_goPremium);
 
         loadMaterialDetails();
     }
@@ -144,10 +138,30 @@ public class MaterialDetailsActivity extends AppCompatActivity {
                         card_loading.setVisibility(View.GONE);
                         card_noticeDetails.setVisibility(View.VISIBLE);
 
-                        materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_ID, material.getId());
-                        materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_TITLE, material.getTitle());
-                        materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_PATH, material.getPathUrl());
-                        materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_TYPE, material.getType().getValue());
+                        if (!material.isPremium() || (material.isPremium() && sessionManager.isPremiumUser())){
+                            materialLaunchIntent = new Intent(MaterialDetailsActivity.this, MaterialActivity.class);
+                            materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_ID, material.getId());
+                            materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_TITLE, material.getTitle());
+                            materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_PATH, material.getPathUrl());
+                            materialLaunchIntent.putExtra(MaterialActivity.EXTRA_MATERIAL_TYPE, material.getType().getValue());
+
+                            btn_launch.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(materialLaunchIntent);
+                                }
+                            });
+                            btn_launch.setVisibility(View.VISIBLE);
+                        } else {
+                            btn_goPremium.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(MaterialDetailsActivity.this, PackageListActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                            btn_goPremium.setVisibility(View.VISIBLE);
+                        }
                     }
                 },
                 new Response.ErrorListener() {

@@ -60,7 +60,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         supportActionBar = getSupportActionBar();
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-        supportActionBar.setTitle(R.string.change_password);
+        //supportActionBar.setTitle(R.string.change_password);
 
         txtInputCurrentPassword = findViewById(R.id.txtInputCurrentPassword);
         txtInputCurrentPassword.getEditText().addTextChangedListener(new TextWatcher() {
